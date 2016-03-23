@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 class App extends React.Component {
 
@@ -7,6 +6,7 @@ class App extends React.Component {
     super(); // gives us context for this in our Component
 
     this.state = { txt: 'this is the state text' };
+    this.update = this.update.bind(this);
   }
 
   update(e) {
@@ -16,17 +16,23 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.state.txt}</h1>
-        <input type="text" onChange={this.update.bind(this)} />
+        <Widget txt={this.state.txt} update={this.update} />
+        <Widget txt={this.state.txt} update={this.update} />
+        <Widget txt={this.state.txt} update={this.update} />
       </div>
     );
   }
 
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('app')
-);
+const Widget = (props) => {
+  return (
+    <div>
+      <input type="text"
+        onChange={props.update} />
+      <p>{props.txt}</p>
+    </div>
+  );
+};
 
 export default App;
