@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
-
     constructor() {
       super();
       this.state = { val: 0 }
@@ -10,15 +9,15 @@ class App extends React.Component {
     }
 
     componentWillMount() {
-      console.log('mounting')
+      this.setState({ m: 2 })
     }
 
     componentDidMount() {
-      console.log('mounted');
+      this.inc = setInterval(this.update, 500)
     }
 
     componentWillUnmount() {
-        console.log('bye!')
+        clearInterval(this.inc)
     }
 
     update() {
@@ -27,7 +26,11 @@ class App extends React.Component {
 
     render () {
       console.log('rendering!')
-      return <button onClick={this.update}>{this.state.val}</button>
+      return (
+        <button onClick={this.update}>
+          {this.state.val * this.state.m}
+        </button>
+      );
     }
 }
 
